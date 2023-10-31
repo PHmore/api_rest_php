@@ -1,0 +1,50 @@
+quando você criar a pasta do projeto execute um "composer init" dentro dela e prossiga com sucessivos "enters".
+Ao terminar você vai ver que alguns qrquivos e pastas foram criados, o projeto todo vai dentro da pasta src, com escessão do arquivos index.php, que fica na raíz.
+O que nos interessa é o composer.json, que você irá apagar tudo dele e deixá-lo deste modo : 
+
+{
+    "autoload": {
+        "psr-4": {
+
+        }
+    }
+}
+
+Dentro das chaves do psr4 você vai seguir a seguinte formatação : 
+
+{
+    "autoload": {
+        "psr-4": {
+            Apelido\\ : "src/caminho"
+        }
+    }
+}
+
+Na parte do apelido você vai colocar o apelido que será dado ao conjunto de todas as classes desejadas e no "src/caminho" você vai digitar o caminho até elas.
+Todas as vezes que você criar um arquivo novo, o nome do arquivo deve ser o mesmo nome da classe que ele contém. No arquivo UserController.php a classe dentro dele tem o mesmo nome, você deverá fazer isso sempre.
+A pasta controller poderia ter vários controllers, como um UserController.php e um AdmController.php. Se você quisesse unir todos esses controller num único conjunto no lugar de Apelido\\ você poderia digitar Controllers\\ e no "src/caminho" digitar "src/controller" que é o caminho da pasta onde se encontram os controllers.
+Após isso em todo arquivo que fosse um Controller você digitaria no início (ainda dentro da tag <?php ?>) um namespace Controllers; .
+Assim você falou para o autoload que aquele arquivo cujo nome é o mesmo da classe faz parte do conjunto dos apelidos chamados Controller.
+Caso você faça isso na UserController.php, quando você quisesse chamar ela em outro lugar basta usar um require_once ("vendor/autoload.php"); seguido de um use Controllers\UserController;
+Assim quando você quisesse criar um objeto da UserController basta criar um $user = new UserController ();
+Quando você terminar de configurar o autoload será necessário executar um composer update no terminal.
+
+O autoload com namespace e use é uma forma de substituir o require, ou require_once.
+Seguindo essas dicas o autoload daqui está assim : 
+
+{
+    "require": {
+        "monolog/monolog": "2.*",
+        "bramus/router": "~1.6",
+        "firebase/php-jwt": "^6.9"
+    } ,
+    "autoload" : {
+        "psr-4" : {
+            "Controllers\\" : "src/controller",
+            "Views\\" : "src/view",
+            "Connections\\" : "src/connection"
+        }
+    }
+}
+
+a parte do require é porque eu instalei algumas bibliotecas, mas para o autoload não é necessária

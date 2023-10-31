@@ -1,5 +1,9 @@
 <?php 
 //Classe que será usada para instanciar conexão com banco de dados
+namespace Connections;
+require_once ("vendor/autoload.php");
+use PDO;
+
 class Connection{
     public static function Connect(){
         $host = "localhost";

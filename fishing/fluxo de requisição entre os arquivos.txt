@@ -1,0 +1,3 @@
+Login.php (envia o email e a senha)-> UserController.php (envia o end point, método e json)-> Connection.php
+
+Connection.php (devolve o json) -> Controller.php (devolve uma sessão) -> Login.php
